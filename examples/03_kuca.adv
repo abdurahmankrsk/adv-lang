@@ -1,0 +1,46 @@
+STORY "Kuća na kraju ulice"
+START_LOCATION dnevna_soba
+
+ITEMS [pismo, fotografija]
+INVENTORY []
+STATE { poseta = 0 }
+
+LOCATION dnevna_soba {
+    SET poseta = poseta + 1
+    IF poseta == 1 {
+        TEXT "Prašina leži na svemu, osim na ivici stola, gde je neko nedavno držao ruku."
+    } ELSE {
+        TEXT "Opet si ovde. Kuća kao da te čeka da nešto odlučiš."
+    }
+
+    OPTION a "Otvori fioku" IF NOT HAS pismo {
+        ADD_ITEM pismo
+        TEXT "Unutra je pismo. Adresa je tvoja. Nikad nije poslato."
+        GOTO dnevna_soba
+    }
+    OPTION b "Uzmi uramljenu sliku sa police" IF NOT HAS fotografija {
+        ADD_ITEM fotografija
+        TEXT "Dvoje ljudi se smeju. Jedan od njih si ti, pre mnogo vremena."
+        GOTO dnevna_soba
+    }
+    OPTION c "Popni se na tavan" {
+        GOTO tavan
+    }
+    OPTION d "Izađi napolje" {
+        END "Vrata se tiho zatvaraju za tobom. Neke priče ostaju neispričane. (KRAJ: Neispričano)"
+    }
+}
+
+LOCATION tavan {
+    TEXT "Na tavanu stoji prazan sto. Izgleda kao da je pravljen za nekoga ko ima šta da ostavi."
+
+    OPTION a "Položi pismo i fotografiju na sto" IF HAS pismo AND HAS fotografija HINT "Sto je prazan, a ti nemaš šta da mu ostaviš. Još nešto je ostalo dole." {
+        REMOVE_ITEM pismo
+        REMOVE_ITEM fotografija
+        TEXT "Spuštaš ih pažljivo, kao da bi mogle da se probude."
+        END "Lakše ti je u rukama. I u grudima. (KRAJ: Mir)"
+    }
+    OPTION b "Siđi dole" {
+        GOTO dnevna_soba
+    }
+}

@@ -1,0 +1,34 @@
+STORY "Dah"
+START_LOCATION pecina
+
+ITEMS []
+INVENTORY []
+STATE { strah = 3 }
+
+LOCATION pecina {
+    IF strah > 0 {
+        TEXT "Mrak je gust. Srce ti lupa tako glasno da ti se čini da ga i zidovi čuju."
+    } ELSE {
+        TEXT "Mrak je i dalje tu. Ali sada ga možeš gledati bez treptanja."
+    }
+
+    OPTION a "Udahni" IF strah > 0 {
+        WHILE strah > 0 {
+            TEXT "*Udah. Izdah.*"
+            SET strah = strah - 1
+        }
+        TEXT "Tišina više nije prazna. Puna je tebe."
+        GOTO pecina
+    }
+    OPTION b "Idi dalje" IF strah == 0 HINT "Noge ti drhte. Prvo moraš da dišeš." {
+        GOTO izlaz
+    }
+    OPTION c "Viči" {
+        END "Odjek ti vraća sopstveni glas. Prvi put čuješ koliko je umoran. (KRAJ: Odjek)"
+    }
+}
+
+LOCATION izlaz {
+    TEXT "Daleko ispred nešto svetli. Nije mnogo. Dovoljno je."
+    END "Mrak ne nestaje. Ti ga prolaziš. (KRAJ: Mirno)"
+}

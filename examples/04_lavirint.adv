@@ -1,0 +1,49 @@
+STORY "Hodnici"
+START_LOCATION raskrsnica
+
+ITEMS [kreda]
+INVENTORY [kreda]
+STATE { oznaceno = false, obilazaka = 0 }
+
+LOCATION raskrsnica {
+    SET obilazaka = obilazaka + 1
+    IF obilazaka > 4 AND NOT oznaceno {
+        TEXT "Ovaj hodnik si već video. Ili ti se samo čini?"
+    } ELSE {
+        TEXT "Tri hodnika. Svi izgledaju isto."
+    }
+
+    OPTION a "Levo" {
+        GOTO levo
+    }
+    OPTION b "Desno" {
+        GOTO desno
+    }
+    OPTION c "Obeleži zid kredom" IF HAS kreda AND NOT oznaceno {
+        SET oznaceno = true
+        TEXT "Povlačiš liniju po kamenu. Sad bar znaš odakle si počeo."
+        GOTO raskrsnica
+    }
+    OPTION d "Napred" IF oznaceno HINT "Pre nego što kreneš dalje, zapamti odakle polaziš." {
+        GOTO izlaz
+    }
+}
+
+LOCATION levo {
+    TEXT "Hodnik se uvija, uvija, pa te vraća tamo gde si bio."
+    OPTION a "Vrati se" {
+        GOTO raskrsnica
+    }
+}
+
+LOCATION desno {
+    TEXT "Slepa ulica. Na zidu neko je urezao: 'I ovde si bio.'"
+    OPTION a "Vrati se" {
+        GOTO raskrsnica
+    }
+}
+
+LOCATION izlaz {
+    TEXT "Kad znaš odakle si krenuo, i put napred ima smisla."
+    END "Izlaz nikad nije bio skriven. Samo si morao da ostaviš trag. (KRAJ: Trag)"
+}

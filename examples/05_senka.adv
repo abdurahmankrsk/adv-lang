@@ -1,0 +1,42 @@
+STORY "Razgovor sa senkom"
+START_LOCATION soba
+
+ITEMS []
+INVENTORY []
+STATE { stav = "ćutljiv", poverenje = 0 }
+
+LOCATION soba {
+    TEXT "Tvoja senka sedi nasuprot tebe. Ne prati tvoje pokrete. Čeka."
+    IF stav == "iskren" {
+        TEXT "Senka se naginje bliže. Prvi put ne beži od svetla."
+    }
+    IF stav == "lažan" {
+        TEXT "Senka se skuplja u ćošku. Ona zna."
+    }
+
+    OPTION a "Reci joj istinu" {
+        SET stav = "iskren"
+        SET poverenje = poverenje + 2
+        TEXT "'Plašio sam se da te pogledam.'"
+        TEXT "Senka klimne glavom. Kao da je to oduvek čekala."
+        GOTO soba
+    }
+    OPTION b "Slaži je" {
+        SET stav = "lažan"
+        SET poverenje = poverenje - 1
+        TEXT "'Ništa mi nije.'"
+        TEXT "Senka ćuti. Ćutanje je glasnije od svake reči."
+        GOTO soba
+    }
+    OPTION c "Pitaj: 'Ko si ti?'" IF stav != "ćutljiv" HINT "Senka ne odgovara onome ko joj se još nije obratio." {
+        TEXT "'Ja sam sve što nisi želeo da pokažeš. I sve što si ipak poneo.'"
+        GOTO soba
+    }
+    OPTION d "Ustani i idi" {
+        IF poverenje >= 2 {
+            END "Kreneš, a ona hoda uz tebe. Prvi put ste isti korak. (KRAJ: Saputnik)"
+        } ELSE {
+            END "Odlaziš sam. Senka ostaje na zidu, tiha i netaknuta. (KRAJ: Stranac)"
+        }
+    }
+}

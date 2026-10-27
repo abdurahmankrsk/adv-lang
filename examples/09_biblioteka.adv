@@ -1,0 +1,51 @@
+STORY "Biblioteka"
+START_LOCATION citaonica
+
+ITEMS []
+INVENTORY []
+STATE { korak = 0 }
+
+LOCATION citaonica {
+    TEXT "Tri knjige leže na stolu. Na koricama svake piše: 'Pročitaj me kad budeš spreman.'"
+    IF korak > 0 {
+        TEXT "Nešto se u tebi slaže, kao deo slagalice."
+    }
+
+    OPTION a "Crvena knjiga: O početku" {
+        IF korak == 0 {
+            SET korak = 1
+            TEXT "Prva strana govori o tome da sve počinje priznanjem."
+        } ELSE {
+            SET korak = 0
+            TEXT "Reči se mešaju. Počni ispočetka."
+        }
+        GOTO citaonica
+    }
+    OPTION b "Plava knjiga: O sredini" {
+        IF korak == 1 {
+            SET korak = 2
+            TEXT "O tome da se ne beži kad postane teško."
+        } ELSE {
+            SET korak = 0
+            TEXT "Reči se mešaju. Počni ispočetka."
+        }
+        GOTO citaonica
+    }
+    OPTION c "Zelena knjiga: O kraju" {
+        IF korak == 2 {
+            SET korak = 3
+            TEXT "O tome da kraj nije kazna."
+        } ELSE {
+            SET korak = 0
+            TEXT "Reči se mešaju. Počni ispočetka."
+        }
+        GOTO citaonica
+    }
+    OPTION d "Izađi iz biblioteke" {
+        IF korak == 3 {
+            END "Izlaziš lakši. Neke stvari se ne uče napamet. (KRAJ: Razumeo si)"
+        } ELSE {
+            END "Odlaziš sa pola rečenice u glavi. (KRAJ: Nedovršeno)"
+        }
+    }
+}

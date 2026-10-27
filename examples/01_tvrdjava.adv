@@ -1,0 +1,45 @@
+STORY "Beg iz tvrđave"
+START_LOCATION celija
+
+ITEMS [kljuc]
+INVENTORY []
+STATE { pokusaji = 0 }
+
+LOCATION celija {
+    IF HAS kljuc {
+        TEXT "U džepu ti leži ključ. Lakši je nego što si mislio."
+    } ELSE {
+        TEXT "Hladan kamen. Tišina. Ne sećaš se kad si zadnji put čuo nešto osim vlastitog disanja."
+        TEXT "Na podu nešto sija."
+    }
+
+    OPTION a "To je ključ. Uzmi ga?" IF NOT HAS kljuc {
+        ADD_ITEM kljuc
+        TEXT "Pokupio si rđavi ključ."
+        TEXT "Neko ga je dugo čuvao za tebe, a da to nije znao."
+        GOTO celija
+    }
+    OPTION b "Otključaj vrata" IF HAS kljuc HINT "Vrata su zaključana. Šta je ono bilo na podu?" {
+        REMOVE_ITEM kljuc
+        TEXT "Ključ se okrene uz tih, umoran zvuk."
+        TEXT "Rđa se mrvi u tvojoj šaci. Odradio je svoje."
+        GOTO hodnik
+    }
+    OPTION c "Udari u vrata" {
+        SET pokusaji = pokusaji + 1
+        IF pokusaji >= 3 {
+            END "Udaraš dok ti šake ne utrnu. Koraci se približavaju. Nisi pobedio vrata. Ali nisi ni odustao, i to je nešto. (KRAJ: Tvrdoglava nada)"
+        } ELSE {
+            TEXT "Udaraš u vrata. Ništa se ne dešava."
+            TEXT "Možda se nešto ne rešava silom."
+            GOTO celija
+        }
+    }
+}
+
+LOCATION hodnik {
+    TEXT "Hodnik je dug i tih. Negde kapa voda."
+    TEXT "U barici na podu vidiš svoje lice. Umorno je i izgrebano."
+    TEXT "Ali gleda te isto onako kako je gledalo pre svega ovoga."
+    END "Hodaš dalje. (KRAJ: Slobodan)"
+}

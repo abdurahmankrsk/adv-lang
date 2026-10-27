@@ -1,0 +1,36 @@
+STORY "Poslednji voz"
+START_LOCATION peron
+
+ITEMS [karta, knjiga]
+INVENTORY [knjiga]
+STATE { cekanje = 0 }
+
+LOCATION peron {
+    TEXT "Peron je skoro prazan. Sat pokazuje vreme koje nikome ne treba."
+
+    OPTION a "Kupi kartu" IF NOT HAS karta {
+        ADD_ITEM karta
+        TEXT "Šalterska radnica ti pruža kartu bez reči. Možda zna više nego što misliš."
+        GOTO peron
+    }
+    OPTION b "Čitaj knjigu dok čekaš" IF HAS knjiga {
+        SET cekanje = cekanje + 1
+        TEXT "Čitaš isti red tri puta. Ali čitaš."
+        GOTO peron
+    }
+    OPTION c "Uđi u voz" IF HAS karta OR cekanje >= 3 HINT "Bez karte te ne puštaju. Možda će neko imati razumevanja ako dovoljno dugo čekaš." {
+        GOTO voz
+    }
+    OPTION d "Vrati se kući" {
+        END "Voz odlazi bez tebe. Ponekad je i to odluka. (KRAJ: Ostao si)"
+    }
+}
+
+LOCATION voz {
+    IF HAS karta {
+        TEXT "Kondukter cepa kartu i klimne glavom."
+    } ELSE {
+        TEXT "Kondukter te gleda dugo, pa slegne ramenima. Neko je odlučio da je dovoljno čekao."
+    }
+    END "Točkovi udaraju o šine kao puls. Negde se nešto završava. Negde počinje. (KRAJ: Putnik)"
+}

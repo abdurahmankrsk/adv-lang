@@ -1,0 +1,49 @@
+STORY "Svetionik"
+START_LOCATION podnozje
+
+ITEMS [sibice, ulje]
+INVENTORY [sibice]
+STATE { noc = 0, napunjeno = false, talasi = 0 }
+
+LOCATION podnozje {
+    TEXT "Svetionik stoji nad tobom, ugašen. Negde na moru brod traži put."
+
+    OPTION a "Uzmi kantu ulja iz šupe" IF NOT HAS ulje AND NOT napunjeno {
+        ADD_ITEM ulje
+        TEXT "Kanta je teška. Ali dobro leži u ruci."
+        GOTO podnozje
+    }
+    OPTION b "Popni se na vrh" {
+        GOTO vrh
+    }
+    OPTION c "Sedi i odmori se" {
+        SET noc = noc + 1
+        IF noc >= 3 {
+            END "Kad si podigao pogled, more je bilo prazno. Neki brodovi ne čekaju. (KRAJ: Prekasno)"
+        } ELSE {
+            TEXT "Prođe sat. Pa još jedan. Brod je sve bliže stenama."
+            GOTO podnozje
+        }
+    }
+}
+
+LOCATION vrh {
+    TEXT "Lampa je hladna. Ispod nje more diše u mraku."
+
+    OPTION a "Napuni lampu uljem" IF HAS ulje {
+        REMOVE_ITEM ulje
+        SET napunjeno = true
+        TEXT "Ulje teče polako. Strpljivo."
+        GOTO vrh
+    }
+    OPTION b "Upali lampu" IF napunjeno AND HAS sibice HINT "Lampa je prazna, ili nemaš čime da je upališ." {
+        WHILE talasi < 3 {
+            TEXT "Svetlo klizi preko vode."
+            SET talasi = talasi + 1
+        }
+        END "Negde dole, neko je ugledao obalu i okrenuo kormilo. Nikad nećeš saznati ko. (KRAJ: Svetionik)"
+    }
+    OPTION c "Siđi dole" {
+        GOTO podnozje
+    }
+}

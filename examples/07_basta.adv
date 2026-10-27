@@ -1,0 +1,54 @@
+STORY "Bašta"
+START_LOCATION basta
+
+ITEMS [seme, kanta]
+INVENTORY [seme]
+STATE { dan = 0, posadjeno = false, zaliveno = 0 }
+
+LOCATION basta {
+    IF posadjeno {
+        TEXT "Zemlja je tamna i tiha. Ispod nje nešto sluša."
+    } ELSE {
+        TEXT "Zemlja je suva. Nije prazna. Samo čeka."
+    }
+
+    OPTION a "Zasadi seme" IF HAS seme {
+        REMOVE_ITEM seme
+        SET posadjeno = true
+        TEXT "Zakopavaš seme. Ne znaš da li će nići."
+        GOTO basta
+    }
+    OPTION b "Zalij zemlju" IF posadjeno AND HAS kanta HINT "Nema šta da se zaliva. Ili nemaš čime da doneseš vodu." {
+        SET zaliveno = zaliveno + 1
+        TEXT "Voda tone u zemlju bez zvuka."
+        GOTO basta
+    }
+    OPTION c "Sačekaj do jutra" IF posadjeno {
+        SET dan = dan + 1
+        IF dan >= 3 {
+            IF zaliveno >= 2 {
+                END "Na zemlji stoji mali, uporan cvet. (KRAJ: Cvet)"
+            } ELSE {
+                END "Zemlja ostaje ista. Možda je trebalo više pažnje. Možda još nije vreme. (KRAJ: Tišina)"
+            }
+        } ELSE {
+            TEXT "Prođe još jedna noć."
+            GOTO basta
+        }
+    }
+    OPTION d "Idi do bunara" {
+        GOTO bunar
+    }
+}
+
+LOCATION bunar {
+    TEXT "Bunar je dubok. Na dnu se vidi nebo."
+    OPTION a "Uzmi kantu" IF NOT HAS kanta {
+        ADD_ITEM kanta
+        TEXT "Kanta je stara, ali još drži vodu."
+        GOTO bunar
+    }
+    OPTION b "Vrati se u baštu" {
+        GOTO basta
+    }
+}

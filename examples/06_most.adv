@@ -1,0 +1,43 @@
+STORY "Most"
+START_LOCATION obala
+
+ITEMS []
+INVENTORY []
+STATE { teret = 5 }
+
+LOCATION obala {
+    IF teret > 2 {
+        TEXT "Nosiš pet kamena. Svaki je neko sećanje. Most pred tobom tanak je kao dah."
+    } ELSE {
+        TEXT "Ramena su ti lakša. Most pred tobom i dalje je tanak, ali ti je sada manje strašan."
+    }
+
+    OPTION a "Spusti jedan kamen" IF teret > 0 {
+        SET teret = teret - 1
+        TEXT "Spuštaš jedan. Ne gledaš ga."
+        GOTO obala
+    }
+    OPTION b "Spusti svo kamenje" IF teret > 1 {
+        WHILE teret > 0 {
+            TEXT "Spuštaš kamen."
+            SET teret = teret - 1
+        }
+        GOTO obala
+    }
+    OPTION c "Pređi most" {
+        IF teret > 2 {
+            END "Daske pucaju pod težinom svega što nosiš. (KRAJ: Pretežak)"
+        } ELSE {
+            GOTO druga_obala
+        }
+    }
+}
+
+LOCATION druga_obala {
+    IF teret == 0 {
+        TEXT "Prelaziš praznih ruku. Nije ti lakše, nego tiše."
+    } ELSE {
+        TEXT "Poneo si nešto sa sobom. Možda neka sećanja nisu teret, nego temelj."
+    }
+    END "Druga obala je samo obala. Ostalo je tvoje. (KRAJ: Druga obala)"
+}
