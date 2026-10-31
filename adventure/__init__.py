@@ -1,5 +1,52 @@
 from .lexer import Lexer
 from .tokens import Token
 from .errors import AdventureError, LexError, ParseError, SemanticError
+from .ast import (
+    ASTNode,
+    Program,
+    Location,
+    Option,
+    Statement,
+    TextStmt,
+    SetStmt,
+    AddItemStmt,
+    RemoveItemStmt,
+    GotoStmt,
+    EndStmt,
+    IfStmt,
+    WhileStmt,
+    Expression,
+    LiteralExpr,
+    VarExpr,
+    HasExpr,
+    UnaryExpr,
+    BinaryExpr,
+)
 
-__all__ = ["Lexer", "Token", "AdventureError", "LexError", "ParseError", "SemanticError"]
+__all__ = [
+    "Lexer",
+    "Token",
+    "AdventureError",
+    "LexError",
+    "ParseError",
+    "SemanticError",
+    "ASTNode",
+    "Program",
+    "Location",
+    "Option",
+    "Statement",
+    "TextStmt",
+    "SetStmt",
+    "AddItemStmt",
+    "RemoveItemStmt",
+    "GotoStmt",
+    "EndStmt",
+    "IfStmt",
+    "WhileStmt",
+    "Expression",
+    "LiteralExpr",
+    "VarExpr",
+    "HasExpr",
+    "UnaryExpr",
+    "BinaryExpr",
+]
