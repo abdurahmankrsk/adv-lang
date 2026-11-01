@@ -1,6 +1,7 @@
 from .lexer import Lexer
 from .tokens import Token
 from .errors import AdventureError, LexError, ParseError, SemanticError
+from .parser import Parser
 from .ast import (
     ASTNode,
     Program,
@@ -30,6 +31,7 @@ __all__ = [
     "LexError",
     "ParseError",
     "SemanticError",
+    "Parser",
     "ASTNode",
     "Program",
     "Location",
