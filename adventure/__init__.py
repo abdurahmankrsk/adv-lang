@@ -4,6 +4,7 @@ from .errors import AdventureError, LexError, ParseError, SemanticError
 from .parser import Parser
 from .semantic import SemanticAnalyzer
 from .interpreter import Interpreter
+from .codegen import HTMLCodeGenerator
 from .ast import (
     ASTNode,
     Program,
@@ -36,6 +37,7 @@ __all__ = [
     "Parser",
     "SemanticAnalyzer",
     "Interpreter",
+    "HTMLCodeGenerator",
     "ASTNode",
     "Program",
     "Location",
