@@ -5,6 +5,7 @@ from .parser import Parser
 from .semantic import SemanticAnalyzer
 from .interpreter import Interpreter
 from .codegen import HTMLCodeGenerator
+from .cli import main as cli_main
 from .ast import (
     ASTNode,
     Program,
@@ -38,6 +39,7 @@ __all__ = [
     "SemanticAnalyzer",
     "Interpreter",
     "HTMLCodeGenerator",
+    "cli_main",
     "ASTNode",
     "Program",
     "Location",
