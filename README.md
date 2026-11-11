@@ -2,12 +2,12 @@
 
 **Adventure DSL** je deklarativni domenski specifičan jezik za pisanje i pokretanje tekstualnih avantura i interaktivne fikcije, razvijen u okviru predmeta **Programski prevodioci** na **Računarskom fakultetu (RAF)**.
 
-- **Student:** Abdurahman Karšić (`akarsic23rn@raf.rs`)
+- **Studenti:** Boris Mirković, Abdurahman Karišik
 - **Saradnik u nastavi:** Mihajlo Stojanović (`m_stojanovic@raf.rs`)
 
 ---
 
-## 🌟 Osobine i arhitektura prevodioca
+##  Osobine i arhitektura prevodioca
 
 Prevodilac je implementiran u čistom programskom jeziku **Python (3.10+)** bez spoljnih zavisnosti. Obuhvata sve analitičke i generičke faze prevođenja:
 
@@ -29,7 +29,7 @@ Prevodilac je implementiran u čistom programskom jeziku **Python (3.10+)** bez 
 
 ---
 
-## 🚀 Pokretanje i upotreba (CLI)
+##  Pokretanje i upotreba (CLI)
 
 Prevodilac poseduje integrisani komandno-linijski interfejs:
 
@@ -56,7 +56,7 @@ python -m adventure test
 
 ---
 
-## 📂 Struktura repozitorijuma
+##  Struktura repozitorijuma
 
 ```text
 Projekat/
@@ -92,7 +92,7 @@ Projekat/
 
 ---
 
-## 🧪 Verifikacija i testovi
+##  Verifikacija i testovi
 
 Test paket (`tests/test_all.py`) pokriva celokupan pajplajn prevodioca:
 - Lekser (prepoznavanje leksema, escape sekvence, nezatvoreni stringovi, nedozvoljeni karakteri).
