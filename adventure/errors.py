@@ -1,5 +1,4 @@
 class AdventureError(Exception):
-    """Osnovna klasa za sve greške."""
     kind = "Greška"
 
     def __init__(self, message, line, column=None):
